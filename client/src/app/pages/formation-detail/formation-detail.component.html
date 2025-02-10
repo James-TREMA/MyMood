@@ -1,0 +1,31 @@
+<div class="container">
+  <app-header [showBackButton]="true"></app-header>
+
+  <div class="content">
+    <div class="formation-content">
+      <div class="formation-header">
+        <h1>{{ formationName }}</h1>
+        <div class="average-mood">
+          <span>Moyenne de la classe</span>
+          <div class="mood-meter">
+            <div class="meter-fill" [style.width.%]="averageMood || 0"></div>
+          </div>
+          <span class="mood-value">{{ averageMood || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="students-grid">
+        <div *ngFor="let student of students" 
+             class="student-card"
+             [class.alert]="student.last_mood >= 75"
+             [style.background-color]="student.last_mood >= 75 ? '#fee2e2' : 'white'">
+          <span class="student-name">{{ student.name }}</span>
+          <div class="score-circle" 
+               [style.background-color]="getMoodColor(student.last_mood || 0)">
+            {{ student.last_mood || 0 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

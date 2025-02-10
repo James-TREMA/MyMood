@@ -1,0 +1,65 @@
+# Dependencies
+**/node_modules/
+**/package-lock.json
+**/.pnp
+**/.pnp.js
+
+clientSAVE
+
+# Environment
+**/.env
+**/.env.*
+!**/.env.example
+
+# Compiled output
+**/dist/
+**/build/
+**/tmp/
+**/out-tsc/
+**/bazel-out/
+**/.angular/cache
+client/.angular
+
+# Testing
+**/coverage/
+**/.nyc_output/
+**/libpeerconnection.log
+**/testem.log
+**/typings/
+
+# IDEs and editors
+**/.idea/
+**/.project
+**/.classpath
+**/.c9/
+**/.vscode/
+**/.settings/
+**/*.sublime-workspace
+**/*.sublime-project
+**/.vs/
+
+# Logs
+**/logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/debug.log
+
+# Misc
+**/.sass-cache/
+**/*.css.map
+**/*.sass.map
+**/*.scss.map
+**/connect.lock
+
+# System Files
+**/.DS_Store
+**/.DS_Store?
+**/._*
+**/.Spotlight-V100
+**/.Trashes
+**/ehthumbs.db
+**/Thumbs.db
+**/desktop.ini
+**/*.swp

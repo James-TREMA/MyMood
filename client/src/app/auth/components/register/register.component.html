@@ -1,0 +1,58 @@
+<div class="register-container">
+  <div class="register-card">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-field">
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Nom complet"
+          class="form-input"
+          [class.error]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+        <div class="error-message" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+          {{ getErrorMessage('name') }}
+        </div>
+      </div>
+
+      <div class="form-field">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Adresse mail"
+          class="form-input"
+          [class.error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        <div class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+
+      <div class="form-field">
+        <input
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Mot de passe"
+          class="form-input"
+          [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+        <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          {{ getErrorMessage('password') }}
+        </div>
+      </div>
+
+      <div class="form-field">
+        <select formControlName="role" class="form-input">
+          <option value="student">Étudiant</option>
+          <option value="supervisor">Superviseur</option>
+          <option value="admin">Administrateur</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-button" [disabled]="registerForm.invalid || isLoading">
+        <span *ngIf="!isLoading">S'inscrire</span>
+        <div class="loader" *ngIf="isLoading"></div>
+      </button>
+
+      <div class="login-link">
+        Déjà inscrit ? <a routerLink="/login">Se connecter</a>
+      </div>
+    </form>
+  </div>
+</div>

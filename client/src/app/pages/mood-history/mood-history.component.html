@@ -1,0 +1,71 @@
+<div class="container">
+  <app-header></app-header>
+
+  <div class="content">
+    <div class="history-section">
+      <div class="section-header">
+        <h2>Historique des humeurs</h2>
+        <div class="filters">
+          <select class="filter-select" (change)="filterByDate($event)">
+            <option value="all">Toute la période</option>
+            <option value="today">Aujourd'hui</option>
+            <option value="week">Cette semaine</option>
+            <option value="month">Ce mois</option>
+          </select>
+          <input 
+            type="text" 
+            class="search-input"
+            placeholder="Rechercher un étudiant..."
+            [(ngModel)]="searchTerm"
+            (input)="filterHistory()">
+        </div>
+      </div>
+
+      <div class="history-list" [class.loading]="loading">
+        <div *ngFor="let entry of filteredHistory" class="history-card">
+          <div class="user-info">
+            <div class="user-details">
+              <h3>{{ entry.user.name }}</h3>
+              <span class="timestamp">{{ entry.changed_at | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-indicator" *ngIf="isSevereChange(entry.previous_score, entry.new_score)">
+              <span class="alert-icon">⚠️</span>
+              <span class="alert-text">Changement important</span>
+            </div>
+          </div>
+
+          <div class="mood-change">
+            <div class="mood-score previous">
+              <span class="score-label">Avant</span>
+              <div class="score-circle" [style.background-color]="getMoodColor(entry.previous_score)">
+                {{ entry.previous_score }}
+              </div>
+            </div>
+
+            <div class="change-indicator">
+              <div class="arrow" [class.negative]="entry.new_score < entry.previous_score">
+                <span class="change-value" [style.color]="getMoodChangeColor(entry.previous_score, entry.new_score)">
+                  {{ getMoodChange(entry.previous_score, entry.new_score) }}
+                </span>
+              </div>
+            </div>
+
+            <div class="mood-score current">
+              <span class="score-label">Après</span>
+              <div class="score-circle" [style.background-color]="getMoodColor(entry.new_score)">
+                {{ entry.new_score }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="filteredHistory.length === 0 && !loading" class="no-history">
+          <div class="empty-state">
+            <span class="empty-icon">📊</span>
+            <p>Aucun historique disponible pour cette période</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

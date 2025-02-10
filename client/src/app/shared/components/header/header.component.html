@@ -1,0 +1,25 @@
+<header>
+  <button *ngIf="showBackButton" class="btn-back" (click)="onBackClick()">Retour liste</button>
+  
+  <div class="header-right">
+    <nav class="nav-menu" *ngIf="isAuthenticated">
+      <ng-container *ngIf="isAdmin">
+        <button class="nav-btn" routerLink="/formations" routerLinkActive="active">Formations</button>
+        <button class="nav-btn" routerLink="/formation-management" routerLinkActive="active">Gestion</button>
+        <button class="nav-btn" routerLink="/user-management" routerLinkActive="active">Utilisateurs</button>
+        <button class="nav-btn" routerLink="/mood-history" routerLinkActive="active">Historique</button>
+      </ng-container>
+      
+      <ng-container *ngIf="isSupervisor">
+        <button class="nav-btn" routerLink="/supervisor" routerLinkActive="active">Dashboard</button>
+        <button class="nav-btn" routerLink="/formations" routerLinkActive="active">Formations</button>
+      </ng-container>
+      
+      <ng-container *ngIf="isStudent">
+        <button class="nav-btn" routerLink="/mood" routerLinkActive="active">Mon humeur</button>
+      </ng-container>
+    </nav>
+    <button class="btn-profile" (click)="onProfileClick()">Mon profil</button>
+    <button class="btn-logout" (click)="onLogout()">Déconnexion</button>
+  </div>
+</header>

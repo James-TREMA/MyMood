@@ -1,0 +1,21 @@
+<div class="container">
+  <app-header></app-header>
+  
+  <h1>Les formations</h1>
+
+  <div class="formations-list">
+    <div class="formations-container">
+      <div *ngFor="let formation of formations" 
+           class="formation-item"
+           (click)="onFormationClick(formation)">
+        {{ formation.name }}
+      </div>
+    </div>
+
+    <div class="bottom-actions">
+      <button *ngIf="isAdmin" class="btn-manage" (click)="onAdminClick()">
+        Gestion groupe et stagiaires
+      </button>
+    </div>
+  </div>
+</div>

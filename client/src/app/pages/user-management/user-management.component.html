@@ -1,0 +1,82 @@
+<div class="container">
+  <app-header></app-header>
+
+  <div class="content">
+    <div class="user-management-section">
+      <h2>{{ isEditingForm ? 'Modifier' : 'Ajouter' }} un utilisateur</h2>
+      
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+        <div class="form-group">
+          <input type="text" formControlName="name" placeholder="Nom" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <input type="email" formControlName="email" placeholder="Email" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <select formControlName="role" class="form-input">
+            <option value="student">Étudiant</option>
+            <option value="supervisor">Superviseur</option>
+            <option value="admin">Administrateur</option>
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="!isEditingForm">
+          <input type="password" formControlName="password" placeholder="Mot de passe" class="form-input">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">Annuler</button>
+          <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+            {{ isEditingForm ? 'Mettre à jour' : 'Créer' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="users-list-section">
+      <h2>Liste des utilisateurs</h2>
+      
+      <div class="users-grid">
+        <div class="user-card" *ngFor="let user of users">
+          <div class="user-info" *ngIf="!isEditing(user.id)">
+            <h3>{{ user.name }}</h3>
+            <p>{{ user.email }}</p>
+            <div class="user-meta">
+              <span class="role-badge" [class]="user.role">{{ user.role }}</span>
+            </div>
+            <div class="user-actions">
+              <button class="btn-icon edit" (click)="startEdit(user)">
+                <i class="fas fa-edit"></i> Modifier
+              </button>
+              <button class="btn-icon delete" (click)="deleteUser(user.id)">
+                <i class="fas fa-trash"></i> Supprimer
+              </button>
+            </div>
+          </div>
+          
+          <form *ngIf="isEditing(user.id)" [formGroup]="getEditForm(user.id)" class="edit-form">
+            <input type="text" formControlName="name" class="form-input" placeholder="Nom">
+            <input type="email" formControlName="email" class="form-input" placeholder="Email">
+            <select formControlName="role" class="form-input">
+              <option value="student">Étudiant</option>
+              <option value="supervisor">Superviseur</option>
+              <option value="admin">Administrateur</option>
+            </select>
+            <div class="edit-actions">
+              <button type="button" class="btn-sm btn-secondary" (click)="cancelEdit(user.id)">
+                Annuler
+              </button>
+              <button type="button" class="btn-sm btn-primary" 
+                      (click)="updateUser(user.id)"
+                      [disabled]="!getEditForm(user.id).valid">
+                Enregistrer
+              </button>
+            </div>
+          </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <app-header [showBackButton]="true"></app-header>
+
+  <div class="profile-container">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+      <input type="text" formControlName="firstName" placeholder="Prénom">
+      <input type="text" formControlName="lastName" placeholder="Nom">
+      <input type="email" formControlName="email" placeholder="Adresse mail">
+      <input type="password" formControlName="newPassword" placeholder="Nouveau mot de passe">
+      <input type="password" formControlName="confirmPassword" placeholder="Confirmer nouveau mot de passe">
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">Annuler</button>
+        <button type="submit" class="btn-submit">Valider</button>
+      </div>
+    </form>
+  </div>
+</div>

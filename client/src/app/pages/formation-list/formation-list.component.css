@@ -1,0 +1,68 @@
+.container {
+  min-height: 100vh;
+  background: #1a1a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  padding: 2rem;
+  margin: 0;
+}
+
+.formations-list {
+  flex: 1;
+  padding: 0 2rem 2rem;
+}
+
+.formations-container {
+  background: #24254c;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formation-item {
+  background: white;
+  color: #24254c;
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.formation-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.btn-manage {
+  background: white;
+  color: #24254c;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-manage:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}

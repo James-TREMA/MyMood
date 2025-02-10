@@ -1,0 +1,128 @@
+/* Reset de base */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #1a1a1a;
+  overflow: hidden;
+}
+
+/* Styles des menus déroulants et inputs */
+select,
+input[type="text"],
+input[type="search"] {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  min-width: 150px;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.2rem;
+  padding-right: 2.5rem;
+}
+
+select:hover,
+input[type="text"]:hover,
+input[type="search"]:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="search"]:focus {
+  outline: none;
+  border-color: #4f46e5;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+select option {
+  background-color: #24254c;
+  color: white;
+  padding: 0.5rem;
+}
+
+/* Styles des options du menu déroulant */
+select option:hover,
+select option:focus,
+select option:active,
+select option:checked {
+  background-color: #4f46e5;
+  color: white;
+}
+
+/* Layout de base */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles des notifications */
+.mat-snack-bar-container {
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  transform: none !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+.success-snackbar {
+  background: #22c55e !important;
+  color: white !important;
+  border-radius: 8px !important;
+  min-width: 300px !important;
+  max-width: 400px !important;
+  padding: 14px 20px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.error-snackbar {
+  background: #ef4444 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  min-width: 300px !important;
+  max-width: 400px !important;
+  padding: 14px 20px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Style du bouton de fermeture */
+.mat-simple-snackbar-action {
+  color: white !important;
+}
+
+/* Animation de la notification */
+.mat-snack-bar-container {
+  animation: slideInLeft 0.3s ease-out !important;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%) !important;
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) !important;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,63 @@
+<div class="container">
+  <app-header></app-header>
+
+  <div class="dashboard-content">
+    <!-- Section Formations -->
+    <section class="dashboard-section">
+      <h2>Mes formations</h2>
+      <div class="formations-grid" [class.loading]="loading.formations">
+        <div *ngFor="let formation of formations"
+             class="formation-card"
+             (click)="onFormationClick(formation)">
+          <h3>{{ formation.name }}</h3>
+          <div class="formation-stats">
+            <span>{{ formation.assignments.length }} étudiants</span>
+            <div class="mood-indicator">
+              <div class="mood-bar">
+                <div class="mood-fill" 
+                     [style.width.%]="formation.averageMood || 0"
+                     [style.background-color]="getMoodColor(formation.averageMood || 0)">
+                </div>
+              </div>
+              <span>{{ formation.averageMood || 0 }}%</span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!loading.formations && formations?.length === 0" class="no-formations">
+          Aucune formation disponible
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Alertes -->
+    <section class="dashboard-section">
+      <h2>Alertes actives</h2>
+      <div class="alerts-list" [class.loading]="loading.alerts">
+        <div *ngFor="let alert of alerts" 
+             class="alert-card"
+             [class.resolved]="alert.status === 'resolved'">
+          <div class="alert-info">
+            <div class="alert-header">
+              <h4>{{ alert.user?.name }}</h4>
+              <span class="alert-time">{{ alert.created_at | date:'short' }}</span>
+            </div>
+            <p>Baisse d'humeur significative détectée</p>
+          </div>
+          <button *ngIf="alert.status === 'pending'"
+                  class="resolve-btn"
+                  (click)="resolveAlert(alert.id, $event)">
+            Résoudre
+          </button>
+          <span *ngIf="alert.status === 'resolved'" class="resolved-badge">
+            Résolu
+          </span>
+        </div>
+        
+        <div *ngIf="alerts.length === 0 && !loading.alerts" class="no-alerts">
+          Aucune alerte active
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

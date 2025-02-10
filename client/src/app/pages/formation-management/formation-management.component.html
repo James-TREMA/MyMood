@@ -1,0 +1,85 @@
+<div class="container">
+  <app-header></app-header>
+
+  <div class="content-wrapper">
+    <!-- Section des formations -->
+    <div class="formations-section">
+      <h2 class="section-title">Les formations</h2>
+      <div class="formations-list">
+        <div *ngFor="let formation of formations" class="formation-item">
+          <div class="formation-info">
+            <span class="formation-name">{{ formation.name }}</span>
+            <span class="student-count">{{ formation.assignments.length }} élève(s)</span>
+          </div>
+          <button class="remove-btn" (click)="deleteFormation(formation.id)" title="Supprimer la formation">×</button>
+        </div>
+      </div>
+      
+      <button class="new-formation" (click)="createFormation()" *ngIf="!showNewFormationDialog">
+        <span>Nouvelle formation</span>
+        <span>+</span>
+      </button>
+
+      <div class="new-formation-dialog" *ngIf="showNewFormationDialog">
+        <input 
+          type="text" 
+          [(ngModel)]="newFormationName" 
+          placeholder="Nom de la formation" 
+          class="formation-input"
+          (keyup.enter)="confirmCreateFormation()">
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" (click)="cancelCreateFormation()">Annuler</button>
+          <button class="btn btn-primary" (click)="confirmCreateFormation()">Créer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section des stagiaires -->
+    <div class="students-section">
+      <h2 class="section-title">Les stagiaires</h2>
+      
+      <!-- En-tête de la liste -->
+      <div class="students-header">
+        <span>Nom</span>
+        <span>Email</span>
+        <span>Formation</span>
+        <span>Changer de formation</span>
+        <span>Sélectionner</span>
+      </div>
+
+      <!-- Liste des stagiaires -->
+      <div class="students-list">
+        <div *ngFor="let student of students" class="student-row">
+          <span>{{ student.name }}</span>
+          <span>{{ student.email }}</span>
+          <span>{{ getFormationName(student) }}</span>
+          <select (change)="assignStudentToFormation(student.id, $event)">
+            <option value="">Aucune formation</option>
+            <option *ngFor="let formation of formations" 
+                    [value]="formation.id"
+                    [selected]="isStudentInFormation(student, formation.id)">
+              {{ formation.name }}
+            </option>
+          </select>
+          <div class="checkbox-wrapper">
+            <input type="checkbox" 
+                   class="checkbox" 
+                   [checked]="selectedStudents.includes(student.id)"
+                   (change)="toggleStudentSelection(student.id)"
+                   [attr.aria-label]="'Sélectionner ' + student.name">
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions-wrapper">
+        <button class="delete-students" 
+                [disabled]="!selectedStudents.length"
+                (click)="deleteSelectedStudents()">
+          <span>Supprimer les stagiaires sélectionnés</span>
+          <span>({{ selectedStudents.length }})</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

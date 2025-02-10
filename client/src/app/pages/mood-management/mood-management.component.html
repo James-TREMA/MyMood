@@ -1,0 +1,43 @@
+<div class="container">
+  <app-header></app-header>
+  
+  <div class="content">
+    <div class="info-text">
+      <p>Cet outil est conçu pour vous permettre de communiquer votre Mood.</p>
+      <p>Grace à ce Mood, nous savons si vous allez bien ou si vous avez besoin d'aide. En cas de besoin vous pouvez appuyer sur le bouton d'appel. Cela enverra une notification à votre formateur ainsi qu'à la médiation.</p>
+      <p>En cas d'urgence, manifestez vous auprès de la personne de l'équipe la plus proche</p>
+    </div>
+
+    <div class="mood-card">
+      <h2>{{ getMoodText() }}</h2>
+
+      <div class="mood-controls">
+        <div class="control-row">
+          <button 
+            class="alert-button" 
+            [class.clicked]="isAlertClicked"
+            (click)="createAlert()">
+            Appel
+          </button>
+
+          <div class="mood-slider-container">
+            <div class="mood-slider">
+              <input 
+                type="range" 
+                [formControl]="moodControl"
+                min="1" 
+                max="100"
+                class="slider"
+                orient="vertical">
+              <div class="slider-track" [style.background]="getSliderBackground()"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mood-status" [class.visible]="isMoodStatusVisible">
+          {{ getMoodStatus() }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
